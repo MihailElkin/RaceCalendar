@@ -8,14 +8,13 @@ import './App.css'
 import { chooseRace, onlyChoose, clear } from './store'
 import RaceCard from './RaceCard';
 import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
-import download from 'downloadjs';
 import Select from 'react-select';
 import { AiFillEdit } from "react-icons/ai";
 const RaceCalendar = (props) => {
   const [tooltip, setTooltip] = useState()
   const [onlyChoose, setOnlyChoose] = useState(false)
   const [tooltipClass, setTooltipClass] = useState('hiden')
+  const [tooltipHelpClass, setTooltipHelpClass] = useState('hiden')
   const [targetElem, setTargetElem] = useState()
   const [go, setGo] = useState(0)
   const [raceList, setRaceList] = useState()
@@ -61,7 +60,6 @@ const RaceCalendar = (props) => {
 
       tooltipElement.style.left = left + 'px';
       tooltipElement.style.top = top + 'px';
-      console.log(left)
     }
 
   }, [tooltip]);
@@ -121,25 +119,28 @@ const RaceCalendar = (props) => {
       ))
     }
   }, [raceCardClass, raceListFilter]);
-  const clickFilter = () => {
-
-  }
   const clickClear = () => {
     props.clear()
     setRaceList(<></>)
   }
   const clickShowChoose = () => {
-    props.onlyChoose(!onlyChoose)
+   // props.onlyChoose(!onlyChoose)
     setOnlyChoose(!onlyChoose)
 
   }
+  const clickHelp = () => {
+    setTooltipHelpClass('modal')
+
+  }
+  const closeHelp=()=>{
+    setTooltipHelpClass('hiden')
+}
   const clickPDF = () => {
     if (raceList.length == 0) {
       alert('Сначала выберите мероприятия!')
     }
     else {
       if (!onlyChoose) {
-        // props.onlyChoose(!onlyChoose)
         setOnlyChoose(!onlyChoose)
       }
       Array.from(document.getElementsByClassName('buttonEdit')).forEach((e)=>{e.classList.add('hiden')})
@@ -180,11 +181,25 @@ const RaceCalendar = (props) => {
         <button onClick={() => clickClear()} >Сбросить все</button>
         <button onClick={() => clickShowChoose()} >{onlyChoose ? 'Показать все кроме "Не поеду"' : 'Показать только выбраные'}</button>
         <button onClick={() => clickPDF()} >Сохранить себе свой календарь!</button>
+        <button onClick={() => clickHelp()} >Помощь</button>
 
       </div>
       <div id='divToPrint'>
         <h1>Календарь МТБ УРФО {new Date().getFullYear()}</h1>
         <div className={tooltipClass} id='tooltip'>{tooltip}</div>
+        <div className={tooltipHelpClass} id='help'>
+          <div className='modal-dialog'>
+        <button className='modal-close' onClick={closeHelp} >
+            &times;
+          </button>
+          <div>
+          1. для формирования календаря нажмите на день с заездом и примите решение <br/> 
+          2. выбранные заезды попадают в список под кадендарем<br/> 
+          3. в списке заезды можно отфильтровать по решению и изменить его, нажав на иконку карандашика<br/> 
+          4. по окончании формирования календаря, его можно сохранить как картинку для печати. При этом все заезды, по которым не принято решение скрываются
+          </div>
+        </div>
+        </div>
         <Calendar
           language="ru"
           displayHeader={false}
