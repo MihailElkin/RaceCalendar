@@ -50,7 +50,7 @@ const RaceCalendar = (props) => {
     if (tooltip) {
       const tooltipElement = document.getElementById('tooltip')
       const coords = targetElem.getBoundingClientRect();
-      let left = coords.left + 200 > document.documentElement.clientWidth ? coords.left - 200 - (targetElem.offsetWidth - tooltipElement.offsetWidth) / 2 : coords.left + (targetElem.offsetWidth - tooltipElement.offsetWidth) / 2;
+      let left = coords.left + 200 > document.documentElement.clientWidth ? coords.left - 300 - (targetElem.offsetWidth - tooltipElement.offsetWidth) / 2 : coords.left +50+ (targetElem.offsetWidth - tooltipElement.offsetWidth) / 2;
       if (left < 0) left = 0;
 
       let top = coords.top - tooltipElement.offsetHeight - 5;
