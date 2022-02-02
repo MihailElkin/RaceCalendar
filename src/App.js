@@ -17,7 +17,9 @@ const RaceCalendar = (props) => {
   const [tooltipHelpClass, setTooltipHelpClass] = useState('hiden')
   const [targetElem, setTargetElem] = useState()
   const [go, setGo] = useState(0)
-  const [raceList, setRaceList] = useState()
+  const [raceList1, setRaceList1] = useState()
+  const [raceList2, setRaceList2] = useState()
+  const [raceList3, setRaceList3] = useState()
   const [raceListFilter, setRaceListFilter] = useState({ yes: true, xz: true, no: false })
   const [race, setRace] = useState({
     date: '',
@@ -107,21 +109,44 @@ const RaceCalendar = (props) => {
   React.useEffect(() => {
     if (raceCardClass == 'hiden') {
       props.chooseRace(race.id, go)
+let newRaceList = props.raceData.filter((e) => {
+  if ((e.go == 1 && raceListFilter.yes) || (e.go == 2 && raceListFilter.xz) || (e.go == 3 && raceListFilter.no)) {
+    return e
+  }
+  else return
+})
+console.log(newRaceList.length)
+const countDiv = newRaceList.length<=11?1:newRaceList.length<=22?2:3
+const raceOnDiv =  Math.floor(newRaceList.length/countDiv) 
 
-      setRaceList(props.raceData.filter((e) => {
-        if ((e.go == 1 && raceListFilter.yes) || (e.go == 2 && raceListFilter.xz) || (e.go == 3 && raceListFilter.no)) {
-          return e
-        }
-        else return
-      }).map(
-        (e) => 
-<p key={e.id} style={{ borderBottom: '2px solid ' + e.color, width: 'fit-content' }}>{e.startDate.toLocaleDateString() + (e.go == 1 ? '   Еду   ' : e.go == 2 ? '   Возможно   ' : '    Не еду   ') + e.name}<button className='buttonEdit' onClick={()=>onEdit(e.id)}><AiFillEdit/></button> </p>
+setRaceList1(newRaceList.map(
+        (e,i) => { if (i<=raceOnDiv){
+return (<p key={e.id} style={{ borderBottom: '2px solid ' + e.color, width: 'fit-content' }}>{e.startDate.toLocaleDateString() + (e.go == 1 ? '   Еду   ' : e.go == 2 ? '   Возможно   ' : '    Не еду   ') + e.name}<button className='buttonEdit' onClick={()=>onEdit(e.id)}><AiFillEdit/></button> </p>)
+}
+else return
+}
+      ))
+      setRaceList2(newRaceList.map(
+        (e,i) => { if (i>raceOnDiv && i<=raceOnDiv*2){
+return (<p key={e.id} style={{ borderBottom: '2px solid ' + e.color, width: 'fit-content' }}>{e.startDate.toLocaleDateString() + (e.go == 1 ? '   Еду   ' : e.go == 2 ? '   Возможно   ' : '    Не еду   ') + e.name}<button className='buttonEdit' onClick={()=>onEdit(e.id)}><AiFillEdit/></button> </p>)
+}
+else return
+}
+      ))
+      setRaceList3(newRaceList.map(
+        (e,i) => { if (i>raceOnDiv*2){
+return (<p key={e.id} style={{ borderBottom: '2px solid ' + e.color, width: 'fit-content' }}>{e.startDate.toLocaleDateString() + (e.go == 1 ? '   Еду   ' : e.go == 2 ? '   Возможно   ' : '    Не еду   ') + e.name}<button className='buttonEdit' onClick={()=>onEdit(e.id)}><AiFillEdit/></button> </p>)
+}
+else return
+}
       ))
     }
   }, [raceCardClass, raceListFilter]);
   const clickClear = () => {
     props.clear()
-    setRaceList(<></>)
+    setRaceList1(<></>)
+    setRaceList2(<></>)
+    setRaceList3(<></>)
   }
   const clickShowChoose = () => {
    // props.onlyChoose(!onlyChoose)
@@ -136,7 +161,7 @@ const RaceCalendar = (props) => {
     setTooltipHelpClass('hiden')
 }
   const clickPDF = () => {
-    if (raceList.length == 0) {
+    if (raceList1.length == 0) {
       alert('Сначала выберите мероприятия!')
     }
     else {
@@ -224,8 +249,16 @@ const RaceCalendar = (props) => {
             onClick={setGo}
           />
         </div>
-        <div>
-          {raceList}
+        <div className='mainRaceList'>
+        <div className='raceList'>
+          {raceList1}
+        </div>
+        <div className='raceList'>
+          {raceList2}
+        </div>
+        <div className='raceList'>
+          {raceList3}
+        </div>
         </div>
       </div>
       <div style={{minHeight: '50px'}}></div>

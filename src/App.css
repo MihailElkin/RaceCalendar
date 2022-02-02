@@ -119,6 +119,13 @@
 h1{
   text-align: center;
 }
+.mainRaceList{
+  overflow: hidden;
+}
+.raceList{
+  float: left;
+  width: 33%;
+}
 
 @keyframes appear {
   from {
