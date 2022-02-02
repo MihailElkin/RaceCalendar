@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/RaceCalendar/static/css/main.897d2961.css",
-    "main.js": "/RaceCalendar/static/js/main.0c5663ff.js",
+    "main.css": "/RaceCalendar/static/css/main.b31fc1fe.css",
+    "main.js": "/RaceCalendar/static/js/main.21f092a7.js",
     "static/js/787.f4b9e84d.chunk.js": "/RaceCalendar/static/js/787.f4b9e84d.chunk.js",
     "index.html": "/RaceCalendar/index.html",
-    "main.897d2961.css.map": "/RaceCalendar/static/css/main.897d2961.css.map",
-    "main.0c5663ff.js.map": "/RaceCalendar/static/js/main.0c5663ff.js.map",
+    "main.b31fc1fe.css.map": "/RaceCalendar/static/css/main.b31fc1fe.css.map",
+    "main.21f092a7.js.map": "/RaceCalendar/static/js/main.21f092a7.js.map",
     "787.f4b9e84d.chunk.js.map": "/RaceCalendar/static/js/787.f4b9e84d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.897d2961.css",
-    "static/js/main.0c5663ff.js"
+    "static/css/main.b31fc1fe.css",
+    "static/js/main.21f092a7.js"
   ]
 }
