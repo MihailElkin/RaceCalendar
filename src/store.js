@@ -120,8 +120,8 @@ initialStore =
             type: 'ХСМ',
             org:'Слюдорудник',
             go: 0,
-             startDate: new Date(2022, 1, 20),
-            endDate: new Date(2022, 1, 20),
+             startDate: new Date(2022, 1, 23),
+            endDate: new Date(2022, 1, 23),
             color:'black'
           },
   {
@@ -270,8 +270,8 @@ initialStore =
             type: 'ХСО',
             org:'Озерск',
             go: 0,
-             startDate: new Date(2022, 4, 22),
-            endDate: new Date(2022, 4, 22),
+             startDate: new Date(2022, 4, 21),
+            endDate: new Date(2022, 4, 21),
             color:'aqua'
           },
   {
